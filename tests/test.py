@@ -1,4 +1,5 @@
 import pytest
+<<<<<<< HEAD
 from pmgr.project import Project, TaskException
 
 test = Project('clean')
