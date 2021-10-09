@@ -5,23 +5,20 @@ from pmgr.project import Project
 def testproj():
     testproj = Project('clean')
     yield testproj
-    #testproj.delete()
+    testproj.delete()
     
 
 def test_add_task(testproj):
-    #testproj.add_task("dust")
+    testproj.add_task("dust")
     assert "dust" in testproj.get_tasks()
 
+def test_remove_task(testproj):
+    testproj.add_task("mop")
+    testproj.remove_task("mop")
+    assert '' in testproj.get_tasks()
 
-
-
-
-
-#def test_add_task(self, task_name):
- #  assert add_task(test, sweep) == 'sweep'
-
-#def test_get_tasks(object_):
- #   assert object_.get_tasks() == ['vaccuum']
-
-    #assert test2.get_tasks() == []
+def test_get_tasks(testproj):
+    assert '' in testproj.get_tasks()
+    testproj.add_task("sweep")
+    assert "sweep" in testproj.get_tasks()
 
