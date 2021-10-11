@@ -1,18 +1,24 @@
 import pytest
-from pmgr.project import Project, TaskException
+from pmgr.project import Project 
 
-#test = Project('clean')
+@pytest.fixture(scope="function")
+def testproj():
+    testproj = Project('clean')
+    yield testproj
+    testproj.delete()
+    
 
-test2 = Project('bake')
+def test_add_task(testproj):
+    testproj.add_task("dust")
+    assert "dust" in testproj.get_tasks()
 
-#test.add_task('vacuum')
+def test_remove_task(testproj):
+    testproj.add_task("mop")
+    testproj.remove_task("mop")
+    assert [] == testproj.get_tasks()
 
-#def test1():
-#     test1 = Project('clean')
-#     test1.add_task('vacuum')
-#     yield test1
-#     test1.remove_task('vacuum')
+def test_get_tasks(testproj):
+    assert [] == testproj.get_tasks()
+    testproj.add_task("sweep")
+    assert "sweep" in testproj.get_tasks()
 
-def test_get_tasks(test1):
-    assert test1.get_tasks() == ['vacuum']
-    assert test2.get_tasks() == []
